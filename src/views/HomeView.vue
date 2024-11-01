@@ -71,11 +71,10 @@ export default {
     };
   },
   methods: {
-      vistaEditar(id) {
+    vistaEditar(id) {
       this.$router.push({ name: 'EditarView', params: { id } });
-      },
-
-      async leerTabla() {
+    },
+    async leerTabla() {
       try {
         const response = await axios.get(APIproducto)
         this.productos = [...response.data]
@@ -83,7 +82,6 @@ export default {
         console.log(error);
       }
     },
-
     async agregarProducto() {
       if (!this.newProducto.marca.trim() || !this.newProducto.modelo.trim()) {
         this.mensajeError = 'Todos los campos son requeridos';
@@ -96,9 +94,8 @@ export default {
 
         }
         await axios.post(APIproducto, producto);
+        alert('Producto agregado correctamente.')
 
-      
-    
         this.newProducto.marca = '';
         this.newProducto.modelo = '';
         await this.leerTabla();
@@ -106,7 +103,6 @@ export default {
         console.log(error);
       }
     },
-
     async eliminarProducto(i) {
       try {
       const confirmacion = confirm("¿Estás seguro de que deseas eliminar este producto?");
@@ -128,11 +124,10 @@ export default {
       alert('No se pudo eliminar el producto.');
     }
     },
-       
   }, 
     async mounted() {
     await this.leerTabla();
-    }
+  }
 }
 </script >
 
