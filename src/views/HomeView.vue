@@ -39,7 +39,9 @@
               <td>{{ producto.param1 }}</td>
               <td>{{ producto.param2 }}</td>
               <td>
-                <button><router-link :to="{name:'EditarView', params: {id: producto.idcod}}"> Editar </router-link></button>
+                <!--button><router-link :to="{name:'EditarView', params: {id: producto.idcod}}">
+                   Editar </router-link></button-->
+                <button @click="vistaEditar(producto.idcod)">Editar</button>
                 <button @click="eliminarProducto(producto.idcod)">Eliminar</button>
               </td>
             </tr>
@@ -69,8 +71,11 @@ export default {
     };
   },
   methods: {
-    
-    async leerTabla() {
+      vistaEditar(id) {
+      this.$router.push({ name: 'EditarView', params: { id } });
+      },
+
+      async leerTabla() {
       try {
         const response = await axios.get(APIproducto)
         this.productos = [...response.data]
@@ -94,8 +99,8 @@ export default {
 
       
     
-        this.newProducto.nombre = '';
-        this.newProducto.categoria = '';
+        this.newProducto.marca = '';
+        this.newProducto.modelo = '';
         await this.leerTabla();
       } catch (error) {
         console.log(error);
@@ -226,7 +231,7 @@ table {
 }
 
 table thead {
-  background-color: blue;
+  background-color: rgb(5, 5, 191);
   color: white;
 }
 

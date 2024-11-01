@@ -96,11 +96,11 @@
       },
   
       async agendarCliente() {
-        if (!this.newCliente.nombre.trim() || !this.newCliente.apellido.trim() || 
-            !this.newCliente.direccion.trim() || !this.newCliente.telefono.trim() || 
-            !this.newCliente.correo.trim()) {
-            this.mensajeError = 'Todos los campos son requeridos';
-             return;
+        if (this.newCliente.nombre.trim().length === 0 || this.newCliente.apellido.trim().length === 0 ||
+            this.newCliente.direccion.trim().length === 0 || this.newCliente.telefono.trim().length === 0 ||
+            this.newCliente.correo.trim().length === 0) {
+            alert('Todos los campos son requeridos.');
+        return;
         }
         try {
           const cliente ={
@@ -151,8 +151,8 @@
       try {
       const nuevoN = prompt("Ingrese nuevo nombre:", cliente.param1);
       const nuevoA = prompt("Ingrese nuevo apellido:", cliente.param2);
-      const nuevoD = prompt("Ingrese nuevo dirección:", cliente.param3);
-      const nuevoT = prompt("Ingrese nueva teléfono:", cliente.param4);
+      const nuevoD = prompt("Ingrese nueva dirección:", cliente.param3);
+      const nuevoT = prompt("Ingrese nuevo teléfono:", cliente.param4);
       const nuevoC = prompt("Ingrese nuevo correo electrónico:", cliente.param5);
 
   
@@ -266,7 +266,7 @@
   }
   
   button:hover {
-    background-color: #458dda;
+    background-color: plum;
   }
   
   table {
@@ -279,7 +279,7 @@
   }
   
   table thead {
-    background-color: blue;
+    background-color: purple;
     color: white;
   }
   

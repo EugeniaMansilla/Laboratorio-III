@@ -3,12 +3,12 @@
         <h1>Datos del producto</h1>
           <div v-if="producto !== null"> 
             <ul>
-                <li> <p>Nombre:</p> {{ producto.param1 }} </li>
+                <li> <p>Marca:</p> {{ producto.param1 }} </li>
                 <li> <p>Modelo:</p> {{ producto.param2 }}</li>
             </ul>
             <h1>Editar Producto</h1>
-            <input type="text" v-model="editProducto.nombre" placeholder="Nuevo nombre" />
-            <input type="text" v-model="editProducto.categoria" placeholder="Nueva categoría" />
+            <input type="text" v-model="editProducto.marca" placeholder="Nueva Marca" required/>
+            <input type="text" v-model="editProducto.modelo" placeholder="Nuevo Modelo" required/>
             <button @click="guardarEdicion(producto)">Guardar Cambios</button>
           </div>
         </div>
@@ -30,8 +30,8 @@
                 return {
                     producto: null,
                     editProducto: { 
-                        nombre: '', 
-                        categoria: '' },
+                        marca: '', 
+                        modelo: '' },
                  }
                
             },
@@ -49,18 +49,22 @@
                 }
                 },
                 async guardarEdicion(producto) {
+                    if (this.editProducto.marca.trim().length === 0 || this.editProducto.modelo.trim().length === 0) {
+                    alert('Todos los campos son requeridos.');
+                    return;
+                } 
                 try {
                 const prodActualizado = {
                     idcod: producto.idcod,
-                    param1: this.editProducto.nombre,
-                    param2: this.editProducto.categoria,
+                    param1: this.editProducto.marca,
+                    param2: this.editProducto.modelo,
                 };
                 
                 await axios.patch(`https://api.yumserver.com/13678/generic/producto`,prodActualizado,);
                 
                 alert('Producto actualizado correctamente.');
-                this.editProducto.nombre = "";
-                this.editProducto.categoria = "";
+                this.editProducto.marca = "";
+                this.editProducto.modelo = "";
                 await this.cargarProducto()
 
                 
